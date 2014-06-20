@@ -3,6 +3,9 @@ EcomDev_ProductPageShipping
 
 Estimate Shipping on the Product Page
 
+- Install module
+- Activate in configuration
+
 To use on product page follow instructions:
 
 - Add on your /template/catalog/product/view.phtml:
