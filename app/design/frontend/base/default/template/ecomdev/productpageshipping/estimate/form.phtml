@@ -69,7 +69,7 @@
             <li class="item">
                 <label for="city"<?php if ($this->isFieldRequired('city')):?> class="required" <?php endif;?>><?php if ($this->isFieldRequired('city')):?><em>*</em><?php endif;?><?php echo  Mage::helper('ecomdev_productpageshipping')->__('City') ?></label>
                 <div class="input-box">
-                    <input class="input-text<?php if ($this->isFieldRequired('city')):?> required-entry<?php endif;?>" id="estimate_city" type="text" name="estimate[city]" value="<?php echo $this->htmlEscape($this->getFieldValue('city')) ?>" />
+                    <input class="input-text<?php if ($this->isFieldRequired('city')):?> required-entry<?php endif;?>" <?php if ($this->isFieldRequired('city')):?> data-required="1"<?php endif;?> id="estimate_city" type="text" name="estimate[city]" value="<?php echo $this->htmlEscape($this->getFieldValue('city')) ?>" />
                 </div>
             </li>
         <?php endif; ?>
@@ -77,7 +77,7 @@
             <li class="item">
                 <label for="estimate_postcode"<?php if ($this->isFieldRequired('postcode')):?> class="required" <?php endif;?>><?php if ($this->isFieldRequired('postcode')):?><em>*</em><?php endif;?><?php echo Mage::helper('ecomdev_productpageshipping')->__('Zip/Postal Code') ?></label>
                 <div class="input-box">
-                    <input class="input-text validate-postcode<?php if ($this->isFieldRequired('postcode')):?> required-entry<?php endif;?>" type="text" id="estimate_postcode" name="estimate[postcode]" value="<?php echo $this->htmlEscape($this->getFieldValue('postcode')) ?>" />
+                    <input class="input-text validate-postcode<?php if ($this->isFieldRequired('postcode')):?> required-entry<?php endif;?>" <?php if ($this->isFieldRequired('postcode')):?>data-required="1"<?php endif;?> type="text" id="estimate_postcode" name="estimate[postcode]" value="<?php echo $this->htmlEscape($this->getFieldValue('postcode')) ?>" />
                 </div>
             </li>
        <?php endif; ?>
@@ -85,7 +85,7 @@
             <li class="item">
                 <label for="estimate_coupon_code"<?php if ($this->isFieldRequired('coupon_code')):?> class="required" <?php endif;?>><?php if ($this->isFieldRequired('coupon_code')):?><em>*</em><?php endif;?><?php echo Mage::helper('ecomdev_productpageshipping')->__('Coupon Code') ?></label>
                 <div class="input-box">
-                    <input class="input-text <?php if ($this->isFieldRequired('coupon_code')):?> required-entry<?php endif;?>" type="text" id="estimate_coupon_code" name="estimate[coupon_code]" value="<?php echo $this->htmlEscape($this->getFieldValue('coupon_code')) ?>" />
+                    <input class="input-text <?php if ($this->isFieldRequired('coupon_code')):?> required-entry<?php endif;?>" <?php if ($this->isFieldRequired('coupon_code')):?> data-required="1"<?php endif;?> type="text" id="estimate_coupon_code" name="estimate[coupon_code]" value="<?php echo $this->htmlEscape($this->getFieldValue('coupon_code')) ?>" />
                 </div>
             </li>
        <?php endif; ?>
@@ -117,18 +117,42 @@
 </div>
 <script type="text/javascript">
 //<![CDATA[
-function estimateProductShipping()
-{
-    var estimationUrl = '<?php echo $this->jsQuoteEscape($this->getEstimateUrl());?>';
-    var items = $$(['.shipping-estimation-form input',
+
+var econdev_productshipping_form_items = $$(['.shipping-estimation-form input',
                     '.shipping-estimation-form select',
                     '#product_addtocart_form input',
                     '#product_addtocart_form select']);
+                    
+econdevProductshippingInitialize();
 
+function econdevProductshippingInitialize()
+{
+	econdev_productshipping_form_items.map(function(elem) {
+		elem.removeClassName('required-entry');
+	});
+}
+
+function econdevProductshippingAddRequired()
+{
+	econdev_productshipping_form_items.map(function(elem) {
+		if(elem.hasAttribute('data-required')) {
+			elem.addClassName('required-entry');
+		}
+	});
+}
+
+function estimateProductShipping()
+{
+    var estimationUrl = '<?php echo $this->jsQuoteEscape($this->getEstimateUrl());?>';
+    var items = econdev_productshipping_form_items;
     var validationResult = true;
 
     // Check the valid input
-    if (!items.map(Validation.validate).all()) {
+    econdevProductshippingAddRequired();
+    validated = items.map(Validation.validate).all();
+    econdevProductshippingInitialize();
+    
+    if (!validated) {
         return;
     }
 
