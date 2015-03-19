@@ -98,15 +98,15 @@
     <default>
         <ecomdev_productpageshipping>
             <settings>
-                <enabled>0</enabled>
+                <enabled>1</enabled>
                 <display_position>left</display_position>
-                <use_country>1</use_country>
-                <use_region>1</use_region>
-                <use_city>1</use_city>
+                <use_country>0</use_country>
+                <use_region>0</use_region>
+                <use_city>0</use_city>
                 <use_postcode>1</use_postcode>
-                <use_coupon_code>1</use_coupon_code>
-                <use_cart>1</use_cart>
-                <use_cart_default>1</use_cart_default>
+                <use_coupon_code>0</use_coupon_code>
+                <use_cart>0</use_cart>
+                <use_cart_default>0</use_cart_default>
             </settings>
         </ecomdev_productpageshipping>
     </default>
