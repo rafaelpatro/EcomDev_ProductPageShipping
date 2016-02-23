@@ -1,0 +1,16 @@
+{
+  "name": "ecomdev/product-page-shipping",
+  "type": "magento-module",
+  "license":"",
+  "description":"",
+
+  "authors":[
+    {
+      "name":"Mauro Silva",
+      "email":"mauro.silva@comvanilla.com.br"
+    }
+  ],
+  "suggest": {
+    "magento-hackathon/magento-composer-installer": "Allows to manage this package as a dependency"
+  }
+}
