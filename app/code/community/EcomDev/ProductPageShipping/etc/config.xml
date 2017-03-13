@@ -78,6 +78,17 @@
             </modules>
         </translate>
     </frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <ecomdev_productpageshipping>
+                    <files>
+                        <default>EcomDev_ProductPageShipping.csv</default>
+                    </files>
+                </ecomdev_productpageshipping>
+            </modules>
+        </translate>
+    </adminhtml>
     <ecomdev>
         <productshippingpage>
             <controller_actions>
